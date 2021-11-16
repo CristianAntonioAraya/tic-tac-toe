@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { conditionToWins, handldeIsPlay } from './services/Validation';
+import React, {  useState } from 'react';
+import GameInfo from './component/GameInfo';
+import { conditionToWins} from './services/Validation';
 import './styles/App.css';
 
 const App = () => {
 
-    const [isPlaying, setIsPlaying] = useState(true);
-    const [won, setWon] = useState(false);
     const initialState = 
     [
         {tile:0, currentData:"", active:true},
@@ -18,41 +17,39 @@ const App = () => {
         {tile:7, currentData:"", active:true},
         {tile:8, currentData:"", active:true}
     ]
-
+    const [won, setWon] = useState(false);
     const [gameStatus, setGameStatus] = useState(initialState)
-
     const [currentPlayer, setCurrentPlayer] = useState("X");
+    const [startGame, setStartGame] = useState(true)
 
-        const handleSetClick = (tile) => {
-            if(currentPlayer === "X"){
-                gameStatus[tile].currentData = "X"
-                gameStatus[tile].active = false;
-                setGameStatus(gameStatus);
-                setCurrentPlayer("O");
-            }
-            else{
-                gameStatus[tile].currentData = "O"
-                gameStatus[tile].active = false;
-                setGameStatus(gameStatus);
-                setCurrentPlayer("X");
-            }
-            setWon( conditionToWins(gameStatus));
-            setIsPlaying( handldeIsPlay(gameStatus))
+    const handleSetClick = (tile) => {
+        setStartGame(false)
+        if(currentPlayer === "X"){
+            gameStatus[tile].currentData = "X"
+            gameStatus[tile].active = false;
+            setGameStatus(gameStatus);
+            setCurrentPlayer("O");
         }
+        if(currentPlayer === "O"){
+            gameStatus[tile].currentData = "O"
+            gameStatus[tile].active = false;
+            setGameStatus(gameStatus);
+            setCurrentPlayer("X");
+        }
+        setWon(conditionToWins(gameStatus));
+    }
+    const handleReset = () => {
+        setGameStatus(initialState);
+        setStartGame(true);
+        setCurrentPlayer('X')
+    }
 
 
     return (
         <div className="app__container">
-            {
-                isPlaying ? <h1>Jugando</h1>
-                : <h1>Fin del Juego</h1>
-            }
-            {
-                won ? <h1>Has Ganado</h1>
-                : <h1>Aun no hay ganadores</h1>
-            }
-            <p>Juega: {currentPlayer}</p>
-            <div className="board">
+            <h1 className="app__title">Tic Tac Toe</h1>
+            <GameInfo  won={won} currentPlayer={currentPlayer} startGame={startGame}/>
+            <div className="app__board">
                 {
                     gameStatus.map(cell=>(
                         cell.active === true ?
@@ -66,6 +63,7 @@ const App = () => {
                     ))
                 }     
             </div>
+            <button className="app__reset" onClick={handleReset}>Restart</button>
         </div>
     )
 }

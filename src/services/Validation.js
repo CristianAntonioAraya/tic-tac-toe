@@ -1,21 +1,4 @@
 
-
-export const handldeIsPlay = (gameStatus) => {
-    if( gameStatus[0].active === false && 
-        gameStatus[1].active === false && 
-        gameStatus[2].active === false && 
-        gameStatus[3].active === false && 
-        gameStatus[4].active === false && 
-        gameStatus[5].active === false &&
-        gameStatus[6].active === false &&
-        gameStatus[7].active === false &&
-        gameStatus[8].active === false 
-        ){
-            return false
-        }
-    else { return true }
-}
-
 export const conditionToWins = (gameStatus) => {
     const ToWin = [
         [0,1,2],
@@ -29,9 +12,9 @@ export const conditionToWins = (gameStatus) => {
     ]
     for (let index = 0; index <= 7; index++) {
         let winCondition = ToWin[index];
-        let a = gameStatus[winCondition[0]]
-        let b = gameStatus[winCondition[1]]
-        let c = gameStatus[winCondition[2]]
+        let a = gameStatus[winCondition[0]].currentData
+        let b = gameStatus[winCondition[1]].currentData
+        let c = gameStatus[winCondition[2]].currentData
         if (a === '' || b === '' || c === '') {
             continue;
          }
@@ -39,4 +22,5 @@ export const conditionToWins = (gameStatus) => {
             return true
         }
     }
+    return false
 }

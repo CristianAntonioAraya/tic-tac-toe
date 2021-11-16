@@ -7,31 +7,78 @@
     align-items: center;
     flex-direction: column;
 }
+.app__title{
+    position: absolute;
+    top: 2rem;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 120px;
+    font-weight: 300;
+    background-image : linear-gradient(-45deg, #FF6D6D,#9b4444);
+	background-size: 400% 400%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+	animation: gradient 5s ease infinite;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 .app__tile-active{
-    height: 7rem;
-    width: 7rem;
+    height: 10rem;
+    width: 10rem;
     display: flex;
     justify-content: center;
+    border: 2px solid #FF6D6D;
     align-items: center;
     padding: 1rem;
-    border: 1px solid red;
-    color: blue;
+    font-family: 'Josefin Sans', sans-serif;
     font-size: 40px;
+    cursor: pointer;
 }
 .app__tile-noactive{
-    height: 7rem;
-    width: 7rem;
+    font-family: 'Josefin Sans', sans-serif;
+    border: 2px solid #FF6D6D;
+    height: 10rem;
+    width: 10rem;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    border: 1px solid red;
-    color: green;
-    font-size: 40px;
+    font-size: 90px;
+    cursor: pointer;
 }
-.board{
+.app__board{
+    font-family: 'Josefin Sans', sans-serif;
     display: grid;
-    height: 20rem;
-    width: 20rem;
+    height: 30rem;
+    width: 30rem;
     grid-template-columns: repeat(3,auto);
+}
+.app__reset{
+    position: absolute;
+    bottom: 10%;
+    z-index: 3;
+    padding: 1rem;
+    font-size: 30px;
+    border-radius: 10px;
+    background-color:#FF6D6D;
+    color: #EEEBDD;
+    border: none;
+    transition: 0.3s all ease;
+    border: 2px solid #FF6D6D;
+    cursor: pointer;
+}
+.app__reset:hover{
+    color:#FF6D6D;
+    background-color: #EEEBDD;
+    border: 2px solid #FF6D6D;
 }
